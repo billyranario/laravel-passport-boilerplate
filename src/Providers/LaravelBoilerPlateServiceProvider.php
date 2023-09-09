@@ -26,6 +26,8 @@ class LaravelBoilerPlateServiceProvider extends ServiceProvider
             __DIR__.'/../App/Http/Resources'                           => app_path('Http/Resources'),
             __DIR__.'/../App/Http/Resources'                           => app_path('Http/Resources'),
             __DIR__.'/../App/Jobs/SendResetPasswordLink.php'           => app_path('Jobs/SendResetPasswordLink.php'),
+            __DIR__.'/../App/Models/User.php'                          => app_path('Models/User.php'),
+            __DIR__.'/../App/Notifications'                             => app_path('Notifications'),
             __DIR__.'/../App/Repositories'                             => app_path('Repositories'),
             __DIR__.'/../App/Services'                                 => app_path('Services'),
             __DIR__.'/../App/Traits'                                   => app_path('Traits'),
