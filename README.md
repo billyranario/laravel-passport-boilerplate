@@ -37,6 +37,25 @@ php artisan passport:client --personal
 > psk-personal-access
 ```
 
+```php config/auth.php
+return [
+    ..., // Other config
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        // Add this following code below
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+    ],
+];
+```
+
+
 ## Contributing
 
 Contributions are welcome. Please submit a PR or open an issue.
