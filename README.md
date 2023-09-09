@@ -29,7 +29,7 @@ composer require billyranario/laravel-passport-boilerplate
 php artisan vendor:publish --tag=billyranario-boilerplate
 
 php artisan migrate
-
+php artisan passport:keys
 php artisan passport:client --password
 > psk-password-grant
 > [0] users
