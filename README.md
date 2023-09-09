@@ -37,7 +37,10 @@ php artisan passport:client --personal
 > psk-personal-access
 ```
 
-```php config/auth.php
+
+
+edit `config/auth.php` file
+```php 
 return [
     ..., // Other config
     'guards' => [
