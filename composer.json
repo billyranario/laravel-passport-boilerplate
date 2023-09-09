@@ -1,0 +1,33 @@
+{
+  "name": "billyranario/laravel-passport-boilerplate",
+  "description": "A Laravel package to quickly start a new project with Laravel Passport",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Billy Ranario",
+      "email": "billyranario@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "laravel/framework": ">=6.0",
+    "laravel/passport": "^12.0",
+    "billyranario/prostarterkit": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Billyranario\\LaravelBoilerPlate\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Billyranario\\LaravelBoilerPlate\\Providers\\LaravelBoilerPlateServiceProvider"
+      ]
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0"
+  }
+}

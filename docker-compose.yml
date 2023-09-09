@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./src:/app/src
+      - ./composer.json:/app/composer.json
+    command: ["composer", "install"]
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   environment:
+  #     PMA_HOST: db
+  #   ports:
+  #     - "8081:80"
+  # db:
+  #   image: mysql:5.7
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: package_test_db
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
