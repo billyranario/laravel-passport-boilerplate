@@ -22,6 +22,7 @@
 ```bash
 composer require laravel/passport
 composer require billyranario/prostarterkit
+
 php artisan vendor:publish --tag=prostarter-kit
 
 composer require billyranario/laravel-passport-boilerplate
@@ -57,6 +58,13 @@ return [
     ],
 ];
 ```
+
+On your .env file, add the following code below. This will provide a default web url for your reset password form page.
+```env
+APP_WEB_URL=http://localhost:4202
+
+```
+
 
 
 ## Contributing
