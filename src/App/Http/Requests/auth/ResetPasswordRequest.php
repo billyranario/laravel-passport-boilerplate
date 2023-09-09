@@ -31,11 +31,30 @@ class ResetPasswordRequest extends BaseRequest
                 'required',
                 'min:8',
                 'max:16',
+                'confirmed',
                 'regex:/[a-z]/',
                 'regex:/[A-Z]/',
                 'regex:/[0-9]/',
                 'regex:/[@$!%*#?&]/'
             ],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Email is invalid.',
+            'email.exists' => 'Email does not exist.',
+            'password.required' => 'Password is required.',
+            'password.min' => 'Password must be at least :min characters long.',
+            'password.max' => 'Password must be less than :max characters long.',
+            'password.confirmed' => 'Password confirmation does not match.',
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one digit and one special character.',
+            'token.required' => 'Token is required.',
         ];
     }
 }
