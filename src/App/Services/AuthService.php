@@ -69,7 +69,7 @@ class AuthService
         if ($token = $this->authRepository->authenticate($credentials, $userDto->getRemember())) {
             return ServiceResponse::success(
                 ServiceResponseMessages::LOGIN_SUCCESS,
-                $token
+                ['token' => $token]
             );
         }
 
@@ -85,7 +85,10 @@ class AuthService
     public function refreshToken(Request $request): ServiceResponse
     {
         if ($token = $this->authRepository->refreshToken($request)) {
-            return ServiceResponse::success(ServiceResponseMessages::REFRESH_TOKEN_SUCCESS, $token);
+            return ServiceResponse::success(
+                ServiceResponseMessages::REFRESH_TOKEN_SUCCESS,
+                ['token' => $token]
+            );
         }
 
         return ServiceResponse::error(ServiceResponseMessages::REFRESH_TOKEN_ERROR);
@@ -142,7 +145,7 @@ class AuthService
             'password' => $userDto->getPassword(),
             'token' => $userDto->getResetToken()
         ];
-        
+
         if ($status = $this->authRepository->resetPassword($data)) {
             LoggerHelper::logInfo('Password reset successfully.', ['status' => $status]);
             return $status === Password::PASSWORD_RESET

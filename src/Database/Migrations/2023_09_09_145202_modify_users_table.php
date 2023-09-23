@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\RoleConstant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,10 @@ return new class extends Migration
             if (!Schema::hasColumn('users', 'lastname')) {
                 $table->string('lastname')->after('firstname');
             }
+
+            if (!Schema::hasColumn('users', 'role_id')) {
+                $table->unsignedTinyInteger('role_id')->default(RoleConstant::CLIENT)->after('lastname');
+            }
         });
     }
 
@@ -32,8 +37,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['firstname', 'lastname']);
+            $table->dropColumn(['firstname', 'lastname', 'role_id']);
         });
-
     }
 };
