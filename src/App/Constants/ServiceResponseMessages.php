@@ -9,6 +9,7 @@ class ServiceResponseMessages
      */
     const SUCCESS = 'Success';
     const ERROR = 'Error';
+    const CREATE_FAILED = 'Unable to create. Please try again later.';
     const REGISTER_SUCCESS = 'Account created successfully.';
     const REGISTER_ERROR = 'Unable to create account. Please try again later.';
     const EMAIL_NOT_FOUND = 'Email does not exists.';
@@ -20,6 +21,17 @@ class ServiceResponseMessages
     const REFRESH_TOKEN_SUCCESS = 'Token refreshed successfully.';
     const REFRESH_TOKEN_ERROR = 'Unable to refresh token. Please try again later.';
     const UNAUTHENTICATED = 'Unauthenticated.';
+
+    /**
+     * User messages
+     */
+    const USER_NOT_FOUND = 'User not found.';
+    const USER_CREATED = 'User created successfully.';
+    const USER_UPDATED = 'User updated successfully.';
+    const USER_DELETED = 'User deleted successfully.';
+    const USER_RESTORED = 'User restored successfully.';
+    const USER_FORCE_DELETED = 'User permanently deleted successfully.';
+    const USER_PASSWORD_CHANGED = 'User password changed successfully.';
 
     /**
      * @param string $email

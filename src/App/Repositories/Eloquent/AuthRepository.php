@@ -7,6 +7,7 @@ use Billyranario\ProstarterKit\App\Helpers\LoggerHelper;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Laravel\Passport\Passport;
 
@@ -60,7 +61,7 @@ class AuthRepository implements AuthRepositoryInterface
             $token = $user->token();
             $token->revoke();
 
-            $tokenResult = $user->createToken(config('auth.password_grant'));
+            $tokenResult = $user->createToken(config('prostarterkit.password_grant'));
             return $tokenResult->accessToken;
         } catch (\Throwable $th) {
             LoggerHelper::logThrowError($th);

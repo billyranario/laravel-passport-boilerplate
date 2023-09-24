@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -69,5 +70,13 @@ class User extends Authenticatable
     public function sendPasswordResetNotification(mixed $data)
     {
         $this->notify(new ResetPasswordNotification($data));
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function preference(): HasOne
+    {
+        return $this->hasOne(Preference::class);
     }
 }

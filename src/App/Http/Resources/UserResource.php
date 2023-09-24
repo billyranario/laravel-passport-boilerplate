@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'roleId' => $this->role_id,
             'createdAt' => $this->created_at->format('F j, Y, g:i A'),
             'updatedAt' => $this->updated_at->format('F j, Y, g:i A'),
+            'preference' => new PreferenceResource($this->whenLoaded('preference')),
         ];
     }
 }

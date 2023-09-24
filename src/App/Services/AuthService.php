@@ -100,7 +100,7 @@ class AuthService
      */
     public function authenticatedUser(): ServiceResponse
     {
-        if ($user = $this->userRepository->findById(auth()->id())) {
+        if ($user = $this->userRepository->findById(auth()->id(), ['preference'])) {
             return ServiceResponse::success(ServiceResponseMessages::SUCCESS, $user);
         }
 

@@ -16,6 +16,8 @@ class UserDto extends BaseDto
      * @var bool $remember
      * @var string $resetToken
      * @var int $roleId
+     * @var string $newPassword
+     * @var string $theme
      */
     private int $id;
     private string $firstname;
@@ -25,6 +27,8 @@ class UserDto extends BaseDto
     private bool $remember = false;
     private string $resetToken = '';
     private int $roleId = RoleConstant::CLIENT;
+    private string $newPassword = '';
+    private string $theme = '';
 
     /**
      * @param int $id
@@ -89,6 +93,22 @@ class UserDto extends BaseDto
     {
         $this->roleId = $roleId; 
     }
+
+    /**
+     * @param string $newPassword
+     */
+    public function setNewPassword(string $newPassword): void
+    {
+        $this->newPassword = $newPassword; 
+    }
+
+    /**
+     * @param string $theme
+     */
+    public function setTheme(string $theme): void
+    {
+        $this->theme = $theme; 
+    }
     
     /**
      * @return int
@@ -152,5 +172,21 @@ class UserDto extends BaseDto
     public function getRoleId(): int
     {
         return $this->roleId; 
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewPassword(): string
+    {
+        return $this->newPassword; 
+    }
+
+    /**
+     * @return string
+     */
+    public function getTheme(): string
+    {
+        return $this->theme; 
     }
 }   

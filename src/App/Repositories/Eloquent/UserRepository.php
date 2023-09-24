@@ -4,8 +4,11 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Billyranario\ProstarterKit\App\Helpers\LoggerHelper;
+use Illuminate\Support\Facades\{
+    DB,
+    Hash
+};
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -67,7 +70,7 @@ class UserRepository implements UserRepositoryInterface
             return $user;
         } catch (\Throwable $th) {
             DB::rollBack();
-            Log::error($th->getMessage(), ['trace' => $th->getTraceAsString()]);
+            LoggerHelper::logThrowError($th);
             return false;
         }
     }
@@ -90,7 +93,58 @@ class UserRepository implements UserRepositoryInterface
             return $user;
         } catch (\Throwable $th) {
             DB::rollBack();
-            Log::error($th->getMessage(), ['trace' => $th->getTraceAsString()]);
+            LoggerHelper::logThrowError($th);
+            return false;
+        }
+    }
+
+    /**
+     * Change Password
+     * @param string $newPassword
+     * @param int $id
+     * @return User|bool
+     */
+    public function changePassword(string $newPassword, int $id): User|bool
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = $this->findById($id);
+            $user->update(['password' => Hash::make($newPassword)]);
+
+            DB::commit();
+            return $user;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            LoggerHelper::logThrowError($th);
+            return false;
+        }
+    }
+
+    /**
+     * Set user preferences.
+     * @param array $data
+     * @param int $id
+     * @return User|bool
+     */
+    public function setPreferences(array $data, int $id): User|bool
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = $this->findById($id);
+
+            if ($user->preference) {
+                $user->preference()->update(['settings' => $data]);
+            } else {
+                $user->preference()->create(['settings' => $data]);
+            }
+
+            DB::commit();
+            return $user->load('preference');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            LoggerHelper::logThrowError($th);
             return false;
         }
     }

@@ -19,11 +19,12 @@ class LaravelBoilerPlateServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
+            __DIR__ . '/../App/Console/Commands'                         => app_path('Console/Commands'),
             __DIR__ . '/../App/Constants'                                => app_path('Constants'),
             __DIR__ . '/../App/Dtos'                                     => app_path('Dtos'),
             __DIR__ . '/../App/Http/Controllers/AuthController.php'      => app_path('Http/Controllers/AuthController.php'),
             __DIR__ . '/../App/Http/Requests/auth'                       => app_path('Http/Requests/auth'),
-            __DIR__ . '/../App/Http/Resources'                           => app_path('Http/Resources'),
+            __DIR__ . '/../App/Http/Requests/user'                       => app_path('Http/Requests/user'),
             __DIR__ . '/../App/Http/Resources'                           => app_path('Http/Resources'),
             __DIR__ . '/../App/Jobs/SendResetPasswordLink.php'           => app_path('Jobs/SendResetPasswordLink.php'),
             __DIR__ . '/../App/Models/User.php'                          => app_path('Models/User.php'),

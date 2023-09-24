@@ -26,14 +26,24 @@ Route::prefix('auth')
         Route::post('reset-password', [AuthController::class, 'resetPassword']);
     });
 
+/**
+ * Common Authenticated API
+ */
 Route::middleware('auth:api')
-    ->prefix('auth')
     ->group(function () {
-        Route::get('me', [AuthController::class, 'authenticatedUser']);
-
-        Route::prefix('tokens')
+        Route::prefix('auth')
             ->group(function () {
-                Route::post('refresh', [AuthController::class, 'refresh']);
+                Route::get('me', [AuthController::class, 'authenticatedUser']);
+
+                Route::prefix('tokens')
+                    ->group(function () {
+                        Route::post('refresh', [AuthController::class, 'refresh']);
+                    });
+                Route::post('logout', [AuthController::class, 'logout']);
             });
-        Route::post('logout', [AuthController::class, 'logout']);
+
+        Route::apiResource('users', User\UserController::class);
+        Route::post('user/change-password', [User\UserController::class, 'changePassword']);
+        Route::post('user/set-preference', [User\UserController::class, 'setPreferences']);
+        Route::get('user/current', [User\UserController::class, 'getCurrentUser']);
     });
