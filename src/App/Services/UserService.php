@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Constants\ServiceResponseMessages;
-use App\Core\ServiceResponse;
 use App\Repositories\Eloquent\UserRepository;
+use Billyranario\ProstarterKit\App\Core\ServiceResponse;
 
 class UserService
 {

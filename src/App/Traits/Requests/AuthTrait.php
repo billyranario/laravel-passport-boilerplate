@@ -21,6 +21,10 @@ trait AuthTrait
         $userDto->setRemember($this->getInputAsBoolean('remember'));
         $userDto->setResetToken($this->getInputAsString('token'));
 
+        if (!empty($this->getInputAsInt('role_id'))) {
+            $userDto->setRoleId($this->getInputAsInteger('role_id'));
+        }
+
         return $userDto;
     }
 }

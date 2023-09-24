@@ -2,6 +2,7 @@
 
 namespace App\Dtos;
 
+use App\Constants\RoleConstant;
 use Billyranario\ProstarterKit\App\Dtos\BaseDto;
 
 class UserDto extends BaseDto
@@ -14,6 +15,7 @@ class UserDto extends BaseDto
      * @var string $password
      * @var bool $remember
      * @var string $resetToken
+     * @var int $roleId
      */
     private int $id;
     private string $firstname;
@@ -22,6 +24,7 @@ class UserDto extends BaseDto
     private string $password;
     private bool $remember = false;
     private string $resetToken = '';
+    private int $roleId = RoleConstant::CLIENT;
 
     /**
      * @param int $id
@@ -80,6 +83,14 @@ class UserDto extends BaseDto
     }
 
     /**
+     * @param int $roleId
+     */
+    public function setRoleId(int $roleId): void
+    {
+        $this->roleId = $roleId; 
+    }
+    
+    /**
      * @return int
      */
     public function getId(): int
@@ -133,5 +144,13 @@ class UserDto extends BaseDto
     public function getResetToken(): string
     {
         return $this->resetToken; 
+    }
+
+    /**
+     * @return int
+     */
+    public function getRoleId(): int
+    {
+        return $this->roleId; 
     }
 }   

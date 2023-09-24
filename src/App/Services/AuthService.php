@@ -46,6 +46,7 @@ class AuthService
             'lastname' => $userDto->getLastname(),
             'email' => $userDto->getEmail(),
             'password' => Hash::make($userDto->getPassword()),
+            'role_id' => $userDto->getRoleId()
         ];
 
         if ($user = $this->userRepository->create($data)) {
