@@ -59,12 +59,19 @@ return [
 ];
 ```
 
-On your .env file, add the following code below. This will provide a default web url for your reset password form page.
+On your `.env` file, add the following code below. This will provide a default web url for your reset password form page.
+The `APP_ADMIN_PASS` is the default password for creating an admin user. You can change it to your desired password. 
+If not specified, the default password is `Abc@123456`.
 ```env
 APP_WEB_URL=http://localhost:4202
-
+APP_ADMIN_PASS=secret
 ```
 
+Once everything is setup, you run the artisan command below to create an admin user.
+```bash
+php artisan admin:create
+```
+This will ask you a password to proceed. The password should match to the value you set in the APP_ADMIN_PASS in your `.env` file.
 
 
 ## Contributing

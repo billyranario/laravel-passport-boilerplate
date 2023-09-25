@@ -33,7 +33,7 @@ class LaravelBoilerPlateServiceProvider extends ServiceProvider
             __DIR__ . '/../App/Services'                                 => app_path('Services'),
             __DIR__ . '/../App/Traits'                                   => app_path('Traits'),
             __DIR__ . '/../Database/Migrations'                          => database_path('migrations'),
-            __DIR__ . '/../Routes/api.php'                               => base_path('routes/auth-api.php'),
+            __DIR__ . '/../Routes/api.php'                               => base_path('routes/api-public.php'),
         ], $this->tag);
     }
 

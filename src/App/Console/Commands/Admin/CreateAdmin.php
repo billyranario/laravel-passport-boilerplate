@@ -116,7 +116,7 @@ class CreateAdmin extends Command
         $userDto->setFirstname($firstname);
         $userDto->setLastname($lastname);
         $userDto->setEmail($email);
-        $userDto->setPassword($staticPassword);
+        $userDto->setPassword($password);
         $userDto->setRoleId(RoleConstant::ADMIN);
 
         $serviceResponse = $this->userService->create($userDto);
