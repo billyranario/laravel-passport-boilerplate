@@ -46,4 +46,6 @@ Route::middleware('auth:api')
         Route::post('user/change-password', [User\UserController::class, 'changePassword']);
         Route::post('user/set-preference', [User\UserController::class, 'setPreferences']);
         Route::get('user/current', [User\UserController::class, 'getCurrentUser']);
+
+        // Activity Logs
     });

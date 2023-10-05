@@ -59,6 +59,7 @@ return [
 ];
 ```
 
+### Creating Superadmin
 On your `.env` file, add the following code below. This will provide a default web url for your reset password form page.
 The `APP_ADMIN_PASS` is the default password for creating an admin user. You can change it to your desired password. 
 If not specified, the default password is `Abc@123456`.
@@ -72,6 +73,64 @@ Once everything is setup, you run the artisan command below to create an admin u
 php artisan admin:create
 ```
 This will ask you a password to proceed. The password should match to the value you set in the APP_ADMIN_PASS in your `.env` file.
+
+
+### Admin:API Middleware
+```php
+    protected $middlewareAliases = [
+        // other aliases....
+        'admin.api' => \App\Http\Middleware\Admin\AdminApi::class, // <- Insert this line
+    ];
+```
+
+
+### Setup UserObserver
+
+`EventServiceProvider.php` Insert the following lines of codes below
+```php
+use App\Models\User;
+use App\Observers\UserObserver;
+
+
+// INSIDE THE CLASS, ADD THIS
+    /**
+     * The model observers for your application.
+     *
+     * @var array
+     */
+    protected $observers = [
+        User::class => [UserObserver::class],
+    ];
+```
+
+### Update Routes
+
+`RouteServiceProvider.php` Insert the followwing
+```php
+
+    public function boot(): void
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+
+        $this->routes(function () {
+            Route::middleware('api')
+                ->prefix('api')
+                ->group(base_path('routes/api.php'));
+            
+            // INSERT THIS BLOCK
+            Route::middleware('api')
+                ->prefix('api/admin')
+                ->group(base_path('routes/admin.php'));
+            // END
+
+            Route::middleware('web')
+                ->group(base_path('routes/web.php'));
+        });
+    }
+```
+
 
 
 ## Contributing

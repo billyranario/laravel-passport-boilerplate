@@ -18,6 +18,10 @@ class UserDto extends BaseDto
      * @var int $roleId
      * @var string $newPassword
      * @var string $theme
+     * @var int $createdBy
+     * @var bool $isBlocked
+     * @var bool $isDeleted
+     * @var bool $forceDelete
      */
     private int $id;
     private string $firstname;
@@ -29,6 +33,12 @@ class UserDto extends BaseDto
     private int $roleId = RoleConstant::CLIENT;
     private string $newPassword = '';
     private string $theme = '';
+    private int $createdBy;
+    private bool $isBlocked = false;
+    private bool $isDeleted = false;
+    private bool $forceDelete = false;
+    private array $selectedItems = [];
+    private bool $isArchive = false;
 
     /**
      * @param int $id
@@ -109,6 +119,54 @@ class UserDto extends BaseDto
     {
         $this->theme = $theme; 
     }
+
+    /**
+     * @param int $createdBy
+     */
+    public function setCreatedBy(int $createdBy): void
+    {
+        $this->createdBy = $createdBy; 
+    }
+
+    /**
+     * @param bool $isBlocked
+     */
+    public function setIsBlocked(bool $isBlocked): void
+    {
+        $this->isBlocked = $isBlocked; 
+    }
+
+    /**
+     * @param bool $isDeleted
+     */
+    public function setIsDeleted(bool $isDeleted): void
+    {
+        $this->isDeleted = $isDeleted; 
+    }
+
+    /**
+     * @param bool $forceDelete
+     */
+    public function setForceDelete(bool $forceDelete): void
+    {
+        $this->forceDelete = $forceDelete; 
+    }
+
+    /**
+     * @param array $selectedItems
+     */
+    public function setSelectedItems(array $selectedItems): void
+    {
+        $this->selectedItems = $selectedItems; 
+    }
+
+    /**
+     * @param bool $isArchive
+     */
+    public function setIsArchive(bool $isArchive): void
+    {
+        $this->isArchive = $isArchive; 
+    }
     
     /**
      * @return int
@@ -188,5 +246,53 @@ class UserDto extends BaseDto
     public function getTheme(): string
     {
         return $this->theme; 
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreatedBy(): int
+    {
+        return $this->createdBy; 
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsBlocked(): bool
+    {
+        return $this->isBlocked; 
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsDeleted(): bool
+    {
+        return $this->isDeleted; 
+    }
+
+    /**
+     * @return bool
+     */
+    public function getForceDelete(): bool
+    {
+        return $this->forceDelete; 
+    }
+
+    /**
+     * @return array
+     */
+    public function getSelectedItems(): array
+    {
+        return $this->selectedItems; 
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsArchive(): bool
+    {
+        return $this->isArchive; 
     }
 }   

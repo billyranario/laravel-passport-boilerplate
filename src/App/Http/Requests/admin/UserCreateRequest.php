@@ -1,21 +1,13 @@
 <?php
 
-namespace App\Http\Requests\auth;
+namespace App\Http\Requests\admin;
 
-use App\Traits\Requests\AuthTrait;
+use App\Traits\Requests\UserTrait;
 use Billyranario\ProstarterKit\App\Http\Requests\BaseRequest;
 
-class RegisterRequest extends BaseRequest
+class UserCreateRequest extends BaseRequest
 {
-    use AuthTrait;
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+    use UserTrait;
 
     /**
      * Get the validation rules that apply to the request.
@@ -27,12 +19,12 @@ class RegisterRequest extends BaseRequest
         return [
             'firstname'  => ['required', 'string', 'max:128'],
             'lastname'  => ['required', 'string', 'max:128'],
+            'role_id'   => ['required', 'integer'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => [
                 'required',
                 'min:8',
                 'max:16',
-                'confirmed',
                 'regex:/[a-z]/',
                 'regex:/[A-Z]/',
                 'regex:/[0-9]/',
@@ -56,7 +48,6 @@ class RegisterRequest extends BaseRequest
             'email.required' => 'Email is required.',
             'email.email' => 'Email is invalid.',
             'email.unique' => 'Email already exists.',
-            'password.confirmed' => 'Password confirmation does not match.',
             'password.required' => 'Password is required.',
             'password.min' => 'Password must be at least :min characters long.',
             'password.max' => 'Password must be less than :max characters long.',

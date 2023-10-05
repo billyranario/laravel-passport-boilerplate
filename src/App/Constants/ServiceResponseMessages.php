@@ -21,10 +21,13 @@ class ServiceResponseMessages
     const REFRESH_TOKEN_SUCCESS = 'Token refreshed successfully.';
     const REFRESH_TOKEN_ERROR = 'Unable to refresh token. Please try again later.';
     const UNAUTHENTICATED = 'Unauthenticated.';
+    const UNAUTHORIZED = 'Unauthorized request.';
 
     /**
      * User messages
      */
+    const USER_LIST_SUCCESS = 'User list retrieved successfully.';
+    const USER_LIST_ERROR = 'Unable to retrieve user list. Please try again later.';
     const USER_NOT_FOUND = 'User not found.';
     const USER_CREATED = 'User created successfully.';
     const USER_UPDATED = 'User updated successfully.';
@@ -32,6 +35,13 @@ class ServiceResponseMessages
     const USER_RESTORED = 'User restored successfully.';
     const USER_FORCE_DELETED = 'User permanently deleted successfully.';
     const USER_PASSWORD_CHANGED = 'User password changed successfully.';
+    const USER_BLOCKED = 'User blocked successfully.';
+    const USER_UNBLOCKED = 'User unblocked successfully.';
+
+    /**
+     * Account messages
+     */
+    const BLOCKED_ACCOUNT = 'Your account has been blocked. Please contact administrator.';
 
     /**
      * @param string $email

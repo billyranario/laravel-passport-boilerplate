@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Constants\ActivityLogConstant;
 use App\Constants\ServiceResponseMessages;
 use App\Dtos\UserDto;
 use App\Repositories\Eloquent\{
+    ActivityLogRepository,
     AuthRepository,
     UserRepository
 };
@@ -19,20 +21,25 @@ class AuthService
     /**
      * @var UserRepository $userRepository
      * @var AuthRepository $authRepository
+     * @var ActivityLogRepository $activityLogRepository
      */
     private UserRepository $userRepository;
     private AuthRepository $authRepository;
+    private ActivityLogRepository $activityLogRepository; 
 
     /**
      * @param UserRepository $userRepository
      * @param AuthRepository $authRepository
+     * @param ActivityLogRepository $activityLogRepository
      */
     public function __construct(
         UserRepository $userRepository,
-        AuthRepository $authRepository
+        AuthRepository $authRepository,
+        ActivityLogRepository $activityLogRepository,
     ) {
         $this->userRepository = $userRepository;
         $this->authRepository = $authRepository;
+        $this->activityLogRepository = $activityLogRepository;
     }
 
     /**
@@ -50,6 +57,11 @@ class AuthService
         ];
 
         if ($user = $this->userRepository->create($data)) {
+            $this->activityLogRepository->create([
+                'author_id' => null,
+                'type' => ActivityLogConstant::REGISTRATION,
+                'activity' => ActivityLogConstant::LOG_REGISTER($user)
+            ]);
             return ServiceResponse::success(ServiceResponseMessages::REGISTER_SUCCESS, $user);
         }
 
@@ -67,7 +79,20 @@ class AuthService
             'password' => $userDto->getPassword()
         ];
 
+        if ($user = $this->userRepository->findByEmail($userDto->getEmail())) {
+            if (!is_null($user->blocked_at)) {
+                return ServiceResponse::error(ServiceResponseMessages::BLOCKED_ACCOUNT, [
+                    'errors' => ['email' => [ServiceResponseMessages::BLOCKED_ACCOUNT]]
+                ]);
+            }
+        }
+
         if ($token = $this->authRepository->authenticate($credentials, $userDto->getRemember())) {
+            $this->activityLogRepository->create([
+                'author_id' => null,
+                'type' => ActivityLogConstant::LOGIN,
+                'activity' => ActivityLogConstant::LOG_SIGNIN($user)
+            ]);
             return ServiceResponse::success(
                 ServiceResponseMessages::LOGIN_SUCCESS,
                 ['token' => $token]

@@ -40,6 +40,21 @@ class UserChangePasswordRequest extends BaseRequest
     }
 
     /**
+     * Get the error messages for the defined validation rules.
+     */
+    public function messages(): array
+    {
+        return [
+            'password.required' => 'Password is required.',
+            'new_password.confirmed' => 'Password confirmation does not match.',
+            'new_password.required' => 'New password is required.',
+            'new_password.min' => 'New password must be at least :min characters long.',
+            'new_password.max' => 'New password must be less than :max characters long.',
+            'new_password.regex' => 'New password must contain at least one uppercase letter, one lowercase letter, one digit and one special character.'
+        ];
+    }
+
+    /**
      * Transform request to data transfer object.
      * @return UserDto
      */

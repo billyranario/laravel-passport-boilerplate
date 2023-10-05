@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\ActivityLogConstant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,13 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('preferences', function (Blueprint $table) {
+        Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
+            $table->foreignId('author_id')
+                ->nullable()
                 ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->json('settings');
+                ->on('users');
+            $table->string('activity', 255);
+            $table->unsignedTinyInteger('type')->nullable();
             $table->timestamps();
         });
     }
@@ -27,10 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('preferences', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-        });
-
-        Schema::dropIfExists('preferences');
+        Schema::dropIfExists('activity_logs');
     }
 };

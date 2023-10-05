@@ -23,6 +23,9 @@ class UserResource extends JsonResource
             'createdAt' => $this->created_at->format('F j, Y, g:i A'),
             'updatedAt' => $this->updated_at->format('F j, Y, g:i A'),
             'preference' => new PreferenceResource($this->whenLoaded('preference')),
+            'createdBy' => new UserResource($this->whenLoaded('createdBy')),
+            'blockedAt' => $this->blocked_at ? $this->blocked_at->format('F j, Y, g:i A') : null,
+            'deletedAt' => $this->deleted_at ? $this->deleted_at->format('F j, Y, g:i A') : null,
         ];
     }
 }

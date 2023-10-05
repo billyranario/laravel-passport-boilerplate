@@ -15,7 +15,7 @@ class CreateAdmin extends Command
      *
      * @var string
      */
-    protected $signature = 'admin:create';
+    protected $signature = 'admin:create {--super}';
 
     /**
      * The console command description.
@@ -117,7 +117,12 @@ class CreateAdmin extends Command
         $userDto->setLastname($lastname);
         $userDto->setEmail($email);
         $userDto->setPassword($password);
-        $userDto->setRoleId(RoleConstant::ADMIN);
+
+        if ($this->option('super')) {
+            $userDto->setRoleId(RoleConstant::SUPERADMIN);
+        } else {
+            $userDto->setRoleId(RoleConstant::ADMIN);
+        }
 
         $serviceResponse = $this->userService->create($userDto);
 
