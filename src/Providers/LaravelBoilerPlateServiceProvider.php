@@ -31,15 +31,16 @@ class LaravelBoilerPlateServiceProvider extends ServiceProvider
             __DIR__ . '/../App/Http/Requests/admin'                      => app_path('Http/Requests/admin'),
             __DIR__ . '/../App/Http/Resources'                           => app_path('Http/Resources'),
             __DIR__ . '/../App/Jobs/SendResetPasswordLink.php'           => app_path('Jobs/SendResetPasswordLink.php'),
-            __DIR__ . '/../App/Models/User.php'                          => app_path('Models/User.php'),
+            __DIR__ . '/../App/Models/User.php'                          => app_path('Models/User-new.php'),
             __DIR__ . '/../App/Models/ActivityLog.php'                   => app_path('Models/ActivityLog.php'),
+            __DIR__ . '/../App/Models/Preference.php'                    => app_path('Models/Preference.php'),
             __DIR__ . '/../App/Notifications'                            => app_path('Notifications'),
             __DIR__ . '/../App/Observers'                                => app_path('Observers'),
             __DIR__ . '/../App/Repositories'                             => app_path('Repositories'),
             __DIR__ . '/../App/Services'                                 => app_path('Services'),
             __DIR__ . '/../App/Traits'                                   => app_path('Traits'),
             __DIR__ . '/../Database/Migrations'                          => database_path('migrations'),
-            __DIR__ . '/../Routes/api.php'                               => base_path('routes/api.php'),
+            __DIR__ . '/../Routes/api.php'                               => base_path('routes/api-new.php'),
             __DIR__ . '/../Routes/admin.php'                             => base_path('routes/admin.php'),
         ], $this->tag);
     }
