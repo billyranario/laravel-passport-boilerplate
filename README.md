@@ -26,7 +26,7 @@ composer require billyranario/prostarterkit
 php artisan vendor:publish --tag=prostarter-kit
 
 composer require billyranario/laravel-passport-boilerplate
-php artisan vendor:publish --tag=billyranario-boilerplate
+php artisan vendor:publish --tag=billyranario-boilerplate --force
 
 php artisan migrate
 php artisan passport:keys
