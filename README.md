@@ -7,7 +7,7 @@
 ## Requirements
 
 - **PHP version:** 7.4 and above
-- **Laravel version:** 6.0 and above 
+- **Laravel version:** 6.0 and above
 - **Laravel Passport:** ^12.0
 - **Billyranario Prostarter-Kit:** ^1.0
 
@@ -22,26 +22,18 @@
 ```bash
 composer require laravel/passport
 composer require billyranario/prostarterkit
-
+php artisan vendor:publish --tag=passport-migrations
 php artisan vendor:publish --tag=prostarter-kit
 
 composer require billyranario/laravel-passport-boilerplate
 php artisan vendor:publish --tag=billyranario-boilerplate --force
 
 php artisan migrate
-php artisan passport:keys
-php artisan passport:client --password
-> psk-password-grant
-> [0] users
-
-php artisan passport:client --personal
-> psk-personal-access
 ```
 
-
-
 edit `config/auth.php` file
-```php 
+
+```php
 return [
     ..., // Other config
     'guards' => [
@@ -59,23 +51,37 @@ return [
 ];
 ```
 
+```bash
+php artisan passport:keys
+php artisan passport:client --password
+> psk-password-grant
+> [0] users
+
+php artisan passport:client --personal
+> psk-personal-access
+```
+
 ### Creating Superadmin
+
 On your `.env` file, add the following code below. This will provide a default web url for your reset password form page.
-The `APP_ADMIN_PASS` is the default password for creating an admin user. You can change it to your desired password. 
+The `APP_ADMIN_PASS` is the default password for creating an admin user. You can change it to your desired password.
 If not specified, the default password is `Abc@123456`.
+
 ```env
 APP_WEB_URL=http://localhost:4202
 APP_ADMIN_PASS=secret
 ```
 
 Once everything is setup, you run the artisan command below to create an admin user.
+
 ```bash
 php artisan admin:create
 ```
+
 This will ask you a password to proceed. The password should match to the value you set in the APP_ADMIN_PASS in your `.env` file.
 
-
 ### Admin:API Middleware
+
 ```php
     protected $middlewareAliases = [
         // other aliases....
@@ -83,10 +89,10 @@ This will ask you a password to proceed. The password should match to the value 
     ];
 ```
 
-
 ### Setup UserObserver
 
 `EventServiceProvider.php` Insert the following lines of codes below
+
 ```php
 use App\Models\User;
 use App\Observers\UserObserver;
@@ -106,6 +112,7 @@ use App\Observers\UserObserver;
 ### Update Routes
 
 `RouteServiceProvider.php` Insert the followwing
+
 ```php
 
     public function boot(): void
@@ -118,7 +125,7 @@ use App\Observers\UserObserver;
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
-            
+
             // INSERT THIS BLOCK
             Route::middleware('api')
                 ->prefix('api/admin')
@@ -130,8 +137,6 @@ use App\Observers\UserObserver;
         });
     }
 ```
-
-
 
 ## Contributing
 
