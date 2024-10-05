@@ -76,6 +76,7 @@ Once everything is setup, you run the artisan command below to create an admin u
 
 ```bash
 php artisan admin:create
+php artisan admin:create --super # to create a super admin
 ```
 
 This will ask you a password to proceed. The password should match to the value you set in the APP_ADMIN_PASS in your `.env` file.
