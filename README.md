@@ -80,7 +80,8 @@ php artisan admin:create
 
 This will ask you a password to proceed. The password should match to the value you set in the APP_ADMIN_PASS in your `.env` file.
 
-### Admin:API Middleware
+### Admin:API Middleware Kernel.php
+Open your `app/Http/Kernel.php` file and insert the following code below.
 
 ```php
     protected $middlewareAliases = [
